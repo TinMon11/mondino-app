@@ -1,5 +1,5 @@
 import React from 'react'
-
+import ItemCount from './ItemCount'
 
 const Item = ({id,title,description,price,image}) => {
   return (
