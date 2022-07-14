@@ -18,6 +18,7 @@ function App() {
         </div>
       <Routes>
         <Route path="/" element={<div className='flex-row flex-wrap'><ItemListContainer/></div>} />
+        <Route path="/category/:nombreCategoria" element={<div className='flex-row flex-wrap'><ItemListContainer/></div>} />
         <Route path="/producto/:Item" element={<ItemDetailContainer/>} />
       </Routes>
       

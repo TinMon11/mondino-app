@@ -8,9 +8,8 @@ const NavBar = () => {
           <div className="text-xl font-extrabold"><Link to="/">TodoMedias</Link></div>
 
             <ul className="menu menu-horizontal p-5">
-              <li><NavLink to="/hombre">Hombre</NavLink></li>
-              <li><NavLink to="/mujer">Mujer</NavLink></li>
-              <li><NavLink to="/kids">Kids</NavLink></li>
+              <li><NavLink to="/category/jewelery">Jewelery</NavLink></li>
+              <li><NavLink to="/category/electronics">Electronics</NavLink></li>
             </ul>
             <div className="form-control flex flex-row">
               <input

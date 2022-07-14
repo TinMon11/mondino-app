@@ -1,26 +1,27 @@
 import React, {  useState, useEffect } from "react";
 import ItemList from "./ItemList"
+import {useParams } from "react-router-dom";
 
 
-const ItemListContainer = ({}) => {
+const ItemListContainer = () => {
 
-
+    let {nombreCategoria} = useParams()
     const [loading, setLoading] = useState(true);
     const [products, setProducts] = useState([]);
+    
+    
 
     useEffect(() => {
-        fetch('https://fakestoreapi.com/products')
+        fetch(nombreCategoria === undefined ? 'https://fakestoreapi.com/products' : 'https://fakestoreapi.com/products/category/'+ nombreCategoria )
           .then((res) => res.json())
           .then((json) => {
             setTimeout(setLoading,2000,false);
             setProducts(json);
           })
-          .catch((err) => {
-            alert('Ocurrio un error inesperado'+err);
+          .catch(() => {
+            alert('Ocurrio un error inesperado');
           });
       }, [products]);
-
-      console.table(products)
 
     return (<div>
         <div>
