@@ -3,7 +3,7 @@ import Item from './Item'
 
 const ItemList = ({items}) => {
   return (
-    <div className="flex flex-row flex-wrap gap-4 justify-around ">
+    <div className="flex flex-row flex-wrap gap-2 justify-evenly mt-24 ">
         { items.map((item) => (
             <Item 
             id = {item.id}

@@ -1,26 +1,26 @@
-import CartWidget from "./CartWidget";
+import {Link, NavLink} from "react-router-dom";
+import CartWidget from "./CartWidget"
 
 const NavBar = () => {
     return (
-        <div className="navbar bg-base-300 rounded-md w-4/5 mx-auto	">
-          <div className="flex-1">
-            <a className="btn normal-case text-xl">TodoMedias</a>
-          </div>
-          <div className="flex-none">
+        <div className="navbar bg-base-300 rounded-md w-100% mx-auto">
+          <div className="flex flex-row flex-wrap mx-auto justify-center">
+          <div className="text-xl font-extrabold"><Link to="/">TodoMedias</Link></div>
+
             <ul className="menu menu-horizontal p-5">
-              <li><a>Hombre</a></li>
-              <li><a>Mujer</a></li>
-              <li><a>Niños</a></li>
+              <li><NavLink to="/hombre">Hombre</NavLink></li>
+              <li><NavLink to="/mujer">Mujer</NavLink></li>
+              <li><NavLink to="/kids">Kids</NavLink></li>
             </ul>
-            <div className="form-control">
+            <div className="form-control flex flex-row">
               <input
                 type="text"
-                placeholder="Search"
-                className="input input-bordered"
+                placeholder="Buscá tu producto"
+                className="input input-bordered w-96"
               />
+              <CartWidget/>
             </div>
-            <CartWidget/>
-          </div>
+          </div>  
     </div>
       ) }
 

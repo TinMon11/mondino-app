@@ -1,27 +1,31 @@
-import React, {  useState } from "react";
-import products from "../products.json"
+import React, {  useState, useEffect } from "react";
 import ItemList from "./ItemList"
 
 
-const ItemListContainer = ({ greeting }) => {
+const ItemListContainer = ({}) => {
 
 
     const [loading, setLoading] = useState(true);
+    const [products, setProducts] = useState([]);
 
-    
-    const promesa = new Promise ( (resolve,reject) => {
-        resolve(false)
-    })
-    
-    promesa.then((param)=> {
-        setTimeout(setLoading,2000,param)
-    }).catch(()=> alert("Error en la carga"))
-    
+    useEffect(() => {
+        fetch('https://fakestoreapi.com/products')
+          .then((res) => res.json())
+          .then((json) => {
+            setTimeout(setLoading,2000,false);
+            setProducts(json);
+          })
+          .catch((err) => {
+            alert('Ocurrio un error inesperado'+err);
+          });
+      }, [products]);
+
+      console.table(products)
 
     return (<div>
-        {greeting}
         <div>
             {loading ? (<h3>CARGANDO</h3>) : (<ItemList items={products}/>)}
+            
         </div>
     </div>  
     )

@@ -1,7 +1,7 @@
 const CartWidget = () => {
 
     return (
-        <div className="flex-none">
+        <div className="ml-5 flex-none">
         <div className="dropdown dropdown-end">
         <label tabindex="0" className="btn btn-ghost btn-circle">
             <div className="indicator">

@@ -1,5 +1,6 @@
 import React from 'react'
 import ItemCount from './ItemCount';
+import { Link } from "react-router-dom";
 
 function ItemDetail ({item}) {
 
@@ -20,6 +21,7 @@ function ItemDetail ({item}) {
                 <div className="card-actions justify-center">
                 <ItemCount stock = {5} initial = {1} onAdd ={(n) => alert (`Agregados ${n}`)}/>
                 </div>
+                <Link to={"/"}><button className="btn btn-primary bg-primary w-24 my-5">Volver</button></Link>
             </div>
         </div>   
     )
