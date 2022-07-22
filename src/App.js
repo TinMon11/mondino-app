@@ -3,27 +3,30 @@ import React from "react";
 import NavBar from "./components/NavBar";
 import ItemListContainer from "./components/ItemListContainer";
 import ItemDetailContainer from "./components/ItemDetailContainer";
-import { BrowserRouter,Outlet, Routes, Route } from "react-router-dom";
-
+import { BrowserRouter, Outlet, Routes, Route } from "react-router-dom";
+import { CartProvider } from "./context/CartContext";
 
 
 function App() {
   return (
-    <BrowserRouter>
-      <div>
-        <div className="App">
-        <NavBar/>
+    <CartProvider>
+      <BrowserRouter>
+        <div>
+          <div className="App">
+            <NavBar />
+          </div>
+          <Outlet />
         </div>
-          <Outlet/>
-        </div>
-      <Routes>
-        <Route path="/" element={<div className='flex-row flex-wrap'><ItemListContainer/></div>} />
-        <Route path="/category/:nombreCategoria" element={<div className='flex-row flex-wrap'><ItemListContainer/></div>} />
-        <Route path="/producto/:Item" element={<ItemDetailContainer/>} />
-      </Routes>
-      
-    </BrowserRouter>
-  )}
+        <Routes>
+          <Route path="/" element={<div className='flex-row flex-wrap'><ItemListContainer /></div>} />
+          <Route path="/category/:nombreCategoria" element={<div className='flex-row flex-wrap'><ItemListContainer /></div>} />
+          <Route path="/producto/:Item" element={<ItemDetailContainer />} />
+        </Routes>
+      </BrowserRouter>
+    </CartProvider>
+
+  )
+}
 export default App;
 
 
