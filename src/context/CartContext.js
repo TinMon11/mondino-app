@@ -18,7 +18,16 @@ const CartProvider = ({ children }) => {
             console.log({item})
             console.log(cart)
         } else {
-            alert("Ver forma para sumarlo al ya existente")
+            alert("El producto ya está agregado en el carrito. Se suman las cantidades")
+
+            for( var i = 0; i < cart.length; i++){ 
+                                   
+                if ( cart[i].id === item.id) { 
+                    setCart([cart[i].quantity + item.quantity]); 
+                    i--; 
+                }
+            }
+
         }
     }
 
