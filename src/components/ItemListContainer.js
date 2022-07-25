@@ -20,12 +20,12 @@ const ItemListContainer = () => {
           .catch(() => {
             alert('Ocurrio un error inesperado');
           });
-      }, [products]);
+      }, [nombreCategoria]);
       
       
     return (<div>
         <div>
-            {loading ? (<h3>CARGANDO</h3>) : (<ItemList items={products}/>)}
+            {loading ? (<span class="loader"></span>) : (<ItemList items={products}/>)}
             
         </div>
     </div>  
