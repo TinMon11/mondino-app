@@ -7,11 +7,17 @@ import CartContext from '../context/CartContext';
 
 function Cart() {
 
-  const { cart, clearAll } = useContext(CartContext)
+  const { cart, clearAll, totalItems, totalPrice } = useContext(CartContext)
 
   return (
 
     <section>
+      {cart.length > 0 &&
+        <div class="flex mx-auto w-8/12 mt-10 mb-10 font-bold">
+          <div class="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center shadow-xl">ITEMS IN CART: {totalItems}</div>
+          <div class="divider divider-horizontal"></div>
+          <div class="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center shadow-xl">TOTAL ${totalPrice}</div>
+        </div>}
       <div className="flex flex-column flex-wrap gap-3 w-4/5 m-auto justify-around">
         {cart.map((item) => (
           <CartItem
@@ -25,10 +31,10 @@ function Cart() {
       </div>
 
       <div className='mt-10 text-center'>
-        {cart.length > 0 ? <btn class="btn btn-primary btn-block w-48" onClick={clearAll}>CLEAR ALL</btn> 
-        : 
+        {cart.length > 0 ? <btn class="btn btn-primary btn-block w-48" onClick={clearAll}>CLEAR ALL</btn>
+          :
           <Link to="../">
-          <h1>EMPTY CART</h1><btn class="btn btn-primary btn-block w-48" onClick={clearAll}>COMPRAR PRODUCTOS</btn></Link>}
+            <h1>EMPTY CART</h1><btn class="btn btn-primary btn-block w-48" onClick={clearAll}>COMPRAR PRODUCTOS</btn></Link>}
       </div>
     </section>
 

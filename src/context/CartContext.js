@@ -11,6 +11,9 @@ const CartProvider = ({ children }) => {
         return exist
     }
 
+    const totalItems = cart.map(item => item.quantity).reduce((prev,curr) => prev + curr, 0)
+    const totalPrice = cart.map(item => item.price * item.quantity).reduce((prev,curr) => prev + curr, 0)
+
     const addItem = (item) => {
         const exist = isInCart(item.id)
         if (!exist) {
@@ -39,6 +42,8 @@ const CartProvider = ({ children }) => {
             cart,
             addItem,
             isInCart,
+            totalItems,
+            totalPrice,
             deleteItem,
             clearAll
         }

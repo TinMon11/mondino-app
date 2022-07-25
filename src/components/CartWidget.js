@@ -4,10 +4,7 @@ import CartContext from "../context/CartContext";
 
 const CartWidget = () => {
 
-    const {cart, clearAll} = useContext(CartContext)
-
-    const totalItems = cart.map(item => item.quantity).reduce((prev,curr) => prev + curr, 0)
-    const totalPrice = cart.map(item => item.price * item.quantity).reduce((prev,curr) => prev + curr, 0)
+    const {clearAll, totalItems, totalPrice} = useContext(CartContext)
 
     return (
         <div class="flex-none">
