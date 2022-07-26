@@ -6,11 +6,11 @@ const NavBar = () => {
   return (
     <div className="navbar bg-base-300 rounded-md w-100% mx-auto">
       <div className="flex flex-row flex-wrap mx-auto justify-center">
-        <div className="text-xl font-extrabold"><Link to="/">OnlineShop</Link></div>
+        <div className="text-xl font-extrabold"><Link to="/">SOCKS SHOP</Link></div>
 
         <ul className="menu menu-horizontal p-5">
-          <li><NavLink to="/category/jewelery">Jewelery</NavLink></li>
-          <li><NavLink to="/category/electronics">Electronics</NavLink></li>
+          <li><NavLink to="/category/hombre">HOMBRE</NavLink></li>
+          <li><NavLink to="/category/mujer">MUJER</NavLink></li>
         </ul>
         <div className="form-control flex flex-row">
           <input
