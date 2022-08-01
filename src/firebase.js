@@ -3,11 +3,13 @@ import {
   collection,
   getDocs,
   doc,
+  addDoc,
   getDoc,
   getFirestore,
   query,
   where,
 } from 'firebase/firestore';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyBr4bYATAMi5bophEuwcqK_M0Xo4zhwr1g",
@@ -44,3 +46,17 @@ export const getItemsFiltered = (categ) => {
     const q = query(colRef, where("category", "==", categ));
     return getDocs(q);
   };
+
+  /*Método para enviar una orden nueva a la colección de "orders"*/
+
+ export const sendOrder = (items,total) => {
+    const order = {
+      buyer: {name: "Martin", phone: "+542954328298", email: "tincho_mondino@hotmail.com"},
+      items,
+      total
+    }
+    const ordersCollection = collection(db,"orders")
+    addDoc(ordersCollection, order).then(({id}) => console.log(id));
+  }
+
+

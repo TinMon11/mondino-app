@@ -3,6 +3,7 @@ import CartItem from './CartItem';
 import { useContext } from "react";
 import { Link } from 'react-router-dom';
 import CartContext from '../context/CartContext';
+import { sendOrder } from "../firebase.js"
 
 
 function Cart() {
@@ -31,10 +32,15 @@ function Cart() {
       </div>
 
       <div className='mt-10 text-center'>
-        {cart.length > 0 ? <button className="btn btn-primary btn-block w-48" onClick={clearAll}>CLEAR ALL</button>
+
+        {cart.length > 0 ?
+          <button className="btn btn-primary w-48 mr-10" onClick={sendOrder(cart, totalPrice)}>PLACE ORDER</button>
           :
           <Link to="../">
-            <h1>EMPTY CART</h1><button className="btn btn-primary btn-block w-48" onClick={clearAll}>COMPRAR PRODUCTOS</button></Link>}
+            <h1 className='mb-10'>EMPTY CART</h1><button className="btn btn-primary btn-block w-48 mr-10">VIEW PRODUCTS</button>
+          </Link>}
+
+        <button className="btn btn-primary  w-48" onClick={clearAll}>CLEAR ALL</button>
       </div>
     </section>
 

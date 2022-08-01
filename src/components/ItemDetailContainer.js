@@ -17,17 +17,6 @@ const ItemDetailContainer = () => {
     })
   }, [Item]);
 
-
-
-  // useEffect (()=> {
-  // fetch('https://fakestoreapi.com/products/'+ Item)
-  //   .then((res) => res.json())
-  //   .then((json) => {
-  //     setData(json);
-  //     setTimeout(setLoading,2000,false);
-  //   })}, [Item]);
-
-
   return (<div className="mt-10">
     {loading ? (<h2>CARGANDO DETALLE DE PRODUCTO</h2>) : (<ItemDetail item={data} />)}
   </div>
