@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app';
+
 import {
   collection,
   getDocs,
@@ -56,7 +57,8 @@ export const getItemsFiltered = (categ) => {
       total
     }
     const ordersCollection = collection(db,"orders")
-    addDoc(ordersCollection, order).then(({id}) => console.log(id));
+    addDoc(ordersCollection, order).then(doc => console.log(doc.id));
+    
   }
 
 

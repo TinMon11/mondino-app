@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import CartItem from './CartItem';
 import { useContext } from "react";
 import { Link } from 'react-router-dom';
@@ -9,6 +9,13 @@ import { sendOrder } from "../firebase.js"
 function Cart() {
 
   const { cart, clearAll, totalItems, totalPrice } = useContext(CartContext)
+  const [idOrder, setIdOrder] = useState("")
+
+  const placeOrder = () =>  {
+    console.log("Se sube la orden")
+    sendOrder(cart, totalPrice)
+    setIdOrder("Probaando")
+  }
 
   return (
 
@@ -34,13 +41,28 @@ function Cart() {
       <div className='mt-10 text-center'>
 
         {cart.length > 0 ?
-          <button className="btn btn-primary w-48 mr-10" onClick={sendOrder(cart, totalPrice)}>PLACE ORDER</button>
-          :
-          <Link to="../">
-            <h1 className='mb-10'>EMPTY CART</h1><button className="btn btn-primary btn-block w-48 mr-10">VIEW PRODUCTS</button>
-          </Link>}
+          <div>
+            <button className="btn btn-primary w-48 mr-10" onClick={placeOrder}>PLACE ORDER</button>
+            <button className="btn btn-primary w-48" onClick={clearAll}>CLEAR ALL</button>
+            
+            {idOrder !== "" &&
+            <div className="mt-10 alert alert-success shadow-lg w-8/12 m-auto">
+              <div>
+                <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLineCap="round" strokeLineJoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>Your order has been placed. Order ID : {idOrder} </span>
+              </div>
+            </div>
+            }
 
-        <button className="btn btn-primary  w-48" onClick={clearAll}>CLEAR ALL</button>
+          </div>
+          :
+          <div>
+            <h1 className='mb-10'>EMPTY CART</h1>
+            <Link to="../">
+              <button className="btn btn-primary btn-block w-48">VIEW PRODUCTS</button>
+            </Link>
+          </div>
+        }
       </div>
     </section>
 
