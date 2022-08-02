@@ -4,6 +4,8 @@ const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
 
+    
+    const [orderId, setOrderId] = useState("");
     const [cart, setCart] = useState([]);
 
     const isInCart = (itemId) => {
@@ -27,6 +29,10 @@ const CartProvider = ({ children }) => {
         }
         }
 
+        const getOrderId = (id) => {
+            setOrderId(id)
+            console.log(orderId)
+        }
 
         const deleteItem = (id) => {
             const _items = cart.filter(el => el.id !== id);
@@ -43,6 +49,7 @@ const CartProvider = ({ children }) => {
             addItem,
             isInCart,
             totalItems,
+            getOrderId,
             totalPrice,
             deleteItem,
             clearAll

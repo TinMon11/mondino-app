@@ -4,7 +4,6 @@ import {
   collection,
   getDocs,
   doc,
-  addDoc,
   getDoc,
   getFirestore,
   query,
@@ -48,17 +47,5 @@ export const getItemsFiltered = (categ) => {
     return getDocs(q);
   };
 
-  /*Método para enviar una orden nueva a la colección de "orders"*/
-
- export const sendOrder = (items,total) => {
-    const order = {
-      buyer: {name: "Martin", phone: "+542954328298", email: "tincho_mondino@hotmail.com"},
-      items,
-      total
-    }
-    const ordersCollection = collection(db,"orders")
-    addDoc(ordersCollection, order).then(doc => console.log(doc.id));
-    
-  }
-
+ 
 
