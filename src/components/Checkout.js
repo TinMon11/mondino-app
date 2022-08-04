@@ -3,22 +3,35 @@ import { useContext } from "react";
 import { Link } from 'react-router-dom';
 import CartContext from '../context/CartContext';
 import Form from './Form';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, Timestamp } from 'firebase/firestore';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 
+function Checkout() {
 
-function Cart() {
+  const { cart, totalItems, totalPrice, clearAll } = useContext(CartContext)
+  const MySwal = withReactContent(Swal)
+  const [userData, setUserData] = useState({name: '', phone: '', email: '', repEmail: ''});
 
-  const { cart, totalItems, totalPrice } = useContext(CartContext)
-  const [idOrden, setIdOrden] = useState("")
+  const notif = (id) =>  MySwal.fire({
+    title: <strong>Order Placed!</strong>,
+    html: <i>Your order Id is {id}</i>,
+    icon: 'success'
+     })  
 
+  const handleChange = (event) => {
+    setUserData({
+        ...userData,
+        [event.target.name]: event.target.value
+    });
+}
 
-  const placeOrder = () => {
-    const fecha = new Date();
-    const fechaOrden = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
-
+  const placeOrder = (e) => {
+    e.preventDefault()
+    const fechaOrden = Timestamp.fromDate(new Date())
     const order = {
-      buyer: { name: "Martin", phone: "+542954328298", email: "tincho_mondino@hotmail.com" },
+      buyer: userData,
       cart,
       totalPrice,
       fechaOrden
@@ -26,22 +39,19 @@ function Cart() {
 
     const db = getFirestore();
     const ordersCollection = collection(db, "orders")
-    addDoc(ordersCollection, order).then(doc => setIdOrden(doc.id));
-
-  }
+    addDoc(ordersCollection, order).then((doc) => {
+      notif(doc.id)
+      })
+    .catch(err => console.log(err))
+    .finally(()=> {
+      clearAll();
+      setUserData({name: "", phone: "", email: "", repEmail: ""})}
+      );
+}
 
   return (
 
     <section>
-
-      {idOrden !== "" &&
-        <div className="mt-10 alert alert-success shadow-lg w-8/12 m-auto">
-          <div>
-            <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-            <span>Your order has been placed. Order ID : {idOrden} </span>
-          </div>
-        </div>
-      }
 
       {cart.length > 0 &&
         <div className="flex mx-auto w-8/12 mt-10 mb-10 font-bold">
@@ -49,17 +59,19 @@ function Cart() {
           <div className="divider divider-horizontal"></div>
           <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center shadow-xl">TOTAL ${totalPrice}</div>
         </div>}
+
       <div className='mt-10 text-center'>
-
-        <Form/>
-
-
+      
+      {cart.length > 0 && 
+      <div>
+      <Form handleChange={handleChange} placeOrder={placeOrder} userData={userData}/>
+      </div>
+      } 
         <div>
-          <button className="btn btn-primary w-48 mr-10" onClick={placeOrder}>PLACE ORDER</button>
+        
           <Link to="../">
             <button className="btn btn-primary btn-block w-48">BACK TO STORE</button>
           </Link>
-
         </div>
       </div>
     </section>
@@ -67,4 +79,4 @@ function Cart() {
   )
 }
 
-export default Cart;
+export default Checkout;
