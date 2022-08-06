@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { useContext } from "react";
 import { Link } from 'react-router-dom';
 import CartContext from '../context/CartContext';
-import Form from './Form';
-import { getFirestore, collection, addDoc, Timestamp } from 'firebase/firestore';
+import Form from "../components/Form"
+import { getFirestore, collection, addDoc, Timestamp, setDoc } from 'firebase/firestore';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
@@ -41,6 +41,7 @@ function Checkout() {
     const ordersCollection = collection(db, "orders")
     addDoc(ordersCollection, order).then((doc) => {
       notif(doc.id)
+      setDoc(doc ,{id: doc.id}, {merge: true})
       })
     .catch(err => console.log(err))
     .finally(()=> {

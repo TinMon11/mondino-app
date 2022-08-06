@@ -47,5 +47,12 @@ export const getItemsFiltered = (categ) => {
     return getDocs(q);
   };
 
+  /*Metodo para traer una orden de compra especifica*/
+
+  
+  export const getOrderById = (id) => {
+    const docRef = doc(db, 'orders', id) // referencia a la collection
+    return getDoc(docRef);
+  };
  
 
