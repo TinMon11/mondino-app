@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ItemDetail from "../components/ItemDetail"
 import { getDetailItem } from '../firebase.js';
+import ClipLoader from "react-spinners/ClipLoader";
 
 const ItemDetailContainer = () => {
 
@@ -17,8 +18,12 @@ const ItemDetailContainer = () => {
     })
   }, [Item]);
 
-  return (<div className="mt-10">
-    {loading ? (<h2>CARGANDO DETALLE DE PRODUCTO</h2>) : (<ItemDetail item={data} />)}
+  return (<div className="mt-10 flex justify-center">
+    {loading ? 
+    <div className="mt-5" >
+    <ClipLoader color={"192BD1"} loading={loading} size={50} /> 
+    </div>
+    : (<ItemDetail item={data} />)}
   </div>
   )
 }

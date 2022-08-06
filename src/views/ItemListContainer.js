@@ -2,6 +2,7 @@ import React, {  useState, useEffect } from "react";
 import ItemList from "../components/ItemList"
 import {useParams } from "react-router-dom";
 import { getItems, getItemsFiltered } from '../firebase.js';
+import PropagateLoader from "react-spinners/ClipLoader";
 
 
 const ItemListContainer = () => {
@@ -25,9 +26,14 @@ const ItemListContainer = () => {
     }, [nombreCategoria]);
   
           
-    return (<div>
+    return (
+      <div className="mt-10 flex justify-center">
         <div>
-            {loading ? (<h2>CARGANDO PRODUCTOS</h2>) : (<ItemList items={products}/>)}
+            {loading ? 
+            <div className="grid mt-5 mx-auto" >
+              <PropagateLoader color={"192BD1"} loading={loading} size={50} /> 
+            </div>
+            : (<ItemList items={products}/>)}
             
         </div>
     </div>  
